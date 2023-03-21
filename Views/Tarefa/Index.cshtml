@@ -1,0 +1,56 @@
+@model IEnumerable<ProjetoTarefas.Models.Tarefa>;
+@{
+    ViewData["Title"] = "Listagem de Contatos";
+}
+
+<h2>Contatos</h2>
+<p>
+    <a class="btn btn-primary" asp-controller="Tarefa" asp-action="Criar">Nova Tarefa</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TarefaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataTarefa)
+            </th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.TarefaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataTarefa)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@item.TarefaId">Editar</a> 
+                    <a class="btn btn-primary" asp-action="Detalhes" asp-route-id="@item.TarefaId">Detalhes</a> 
+                    <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@item.TarefaId">Deletar</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

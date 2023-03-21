@@ -1,0 +1,56 @@
+@model ProjetoTarefas.Models.Usuario;
+    
+@{
+    ViewData["Title"] = "Agenda de Tarefas: Login";
+}
+
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+
+        <div class="col-md-9 col-lg-6 col-xl-5">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image">
+        </div>
+
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <!-- FORMULÁRIO -->
+            <form asp-action="CriarUsuario">
+
+                <div class="divider d-flex align-items-center my-4">
+                    <h2 class="text-center fw-bold mx-3 mb-0">Criar nova conta</h2>
+                </div>
+
+                <!-- Nome Completo -->
+                <div class="form-outline mb-4">
+                    <input asp-for="Nome" type="text" id="form3Example1" class="form-control form-control-lg" placeholder="Nome completo"/>
+                    <label class="form-label" for="form3Example3">Endereço de e-mail válido</label>
+                </div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input asp-for="Email" type="email" id="form3Example2" class="form-control form-control-lg" placeholder="E-mail válido"/>
+                    <label class="form-label" for="form3Example3">Endereço de e-mail válido</label>
+                </div>
+                <!-- Data de nascimento -->
+                <div class="form-outline mb-4">
+                    <input asp-for="DataNascimento" type="date" id="form3Example3" class="form-control form-control-lg" placeholder="Data de nascimento"/>
+                    <label class="form-label" for="form3Example3">Data de nascimento</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-3">
+                    <input asp-for="Senha" type="password" id="form3Example4" class="form-control form-control-lg"
+                        placeholder="Enter password" />
+                    <label class="form-label" for="form3Example4">Escolha uma Senha</label>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Confirmar</button>
+                    <a asp-action="Index" class="text-body">Já tem uma conta?</a>
+                </div>
+            </form>
+            <!-- FIM FORMULÁIO -->
+
+        </div>
+    </div>
+    <br>
+</section>
