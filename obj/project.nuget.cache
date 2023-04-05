@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I2tuViyf9as5NiSc4RnW9rRwXDWO1oSPM3uMdsbJqPZx82AlGnXpm2sbIW/D18dpiCKj/5rmsexQaTttmMgfvg==",
+  "dgSpecHash": "4uBXrniBj+uWRJFNZPbNqLY2BmBLN7OY/MZqBNKbYbWaVjnmsHYo4j/YiCRWR12WGYj/QVXLIiPpyTaI4dHa5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Wallace\\Desktop\\Projetos\\ProjetoTarefas\\ProjetoTarefas.csproj",
+  "projectFilePath": "C:\\Users\\Wallace\\Desktop\\Projetos\\Agenda-de-Tarefas\\ProjetoTarefas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Wallace\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
@@ -22,6 +22,7 @@
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.2.0\\microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.4\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.4.nupkg.sha512",
+    "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\7.0.4\\microsoft.aspnetcore.identity.ui.7.0.4.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.session\\2.2.0\\microsoft.aspnetcore.session.2.2.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
@@ -37,7 +38,8 @@
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.dependencymodel\\7.0.0\\microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
-    "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\2.2.0\\microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\7.0.0\\microsoft.extensions.fileproviders.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\7.0.4\\microsoft.extensions.fileproviders.embedded.7.0.4.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\2.2.0\\microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.identity.core\\7.0.4\\microsoft.extensions.identity.core.7.0.4.nupkg.sha512",
     "C:\\Users\\Wallace\\.nuget\\packages\\microsoft.extensions.identity.stores\\7.0.4\\microsoft.extensions.identity.stores.7.0.4.nupkg.sha512",

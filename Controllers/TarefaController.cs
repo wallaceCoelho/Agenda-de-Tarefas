@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ProjetoTarefas.Data;
 using ProjetoTarefas.Models;
 
 namespace ProjetoTarefas.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]"), Authorize]
     public class TarefaController : Controller
     {
         private readonly ProjetoContext _context;
@@ -20,6 +16,7 @@ namespace ProjetoTarefas.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
+            ViewBag.UserIdentity = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier);
             var tarefas = _context.Tarefas.ToList();
             return View(tarefas);
         }
@@ -37,9 +34,9 @@ namespace ProjetoTarefas.Controllers
             {
                 _context.Tarefas.Add(tarefa);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToRoute("Index", tarefa);
             }
-            return View(tarefa);
+            return View();
         }
 
         [HttpGet("{id}")]
@@ -53,7 +50,7 @@ namespace ProjetoTarefas.Controllers
             return Ok(tarefa);
         }
 
-         [HttpGet("ObterPorNome")]
+        [HttpGet("ObterPorNome")]
         public IActionResult ObterPorTitulo(string titulo)
         {
             var tarefa = _context.Tarefas.Where(x => x.Titulo.Contains(titulo));
