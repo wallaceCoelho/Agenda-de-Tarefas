@@ -4,16 +4,18 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using ProjetoTarefas.Interfaces;
 
 namespace ProjetoTarefas.Services
 {
-    public class HashAuth
+    public class HashPassword 
     {
         private HashAlgorithm _algoritmo;
-        public HashAuth(HashAlgorithm algoritmo) 
+        public HashPassword(HashAlgorithm algoritmo)
         {
             _algoritmo = algoritmo;
-        } 
+        }
+
         public string CriptografarSenha(string senha)
         {
             var valorHash = Encoding.UTF8.GetBytes(senha);

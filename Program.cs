@@ -1,5 +1,7 @@
 using ProjetoTarefas.Data;
 using Microsoft.EntityFrameworkCore;
+using ProjetoTarefas.Interfaces;
+using ProjetoTarefas.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
 
@@ -7,14 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICookieService, CookieService>();
+builder.Services.AddDbContext<ProjetoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = new PathString("/Usuario/Index/");
-        options.AccessDeniedPath = new PathString("/Shared/Error/");
+        options.ExpireTimeSpan = TimeSpan.FromHours(8);
+        options.SlidingExpiration = true;
+        options.LoginPath = new PathString("/");
+        options.AccessDeniedPath = new PathString("/");
     });
-builder.Services.AddDbContext<ProjetoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-        
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

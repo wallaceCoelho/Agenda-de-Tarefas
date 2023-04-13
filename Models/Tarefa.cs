@@ -29,7 +29,7 @@ namespace ProjetoTarefas.Models
         public DateTime DataTarefa { get; set; }
         
         [ForeignKey("UsuarioId")]
-        public int UsuarioId { get; set; }
+        public int? UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
     }
 }

@@ -1,68 +1,54 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoTarefas.Data;
-using ProjetoTarefas.Services;
 using ProjetoTarefas.Models;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
+using ProjetoTarefas.Interfaces;
+using ProjetoTarefas.Services;
+using System.Security.Cryptography;
+using System.Text.Json;
+
 namespace ProjetoTarefas.Controllers
 {
     [Route("[controller]")]
     public class UsuarioController : Controller
     {
-        ClaimsJwt login = new ClaimsJwt();   
-        private HashAuth hash = new HashAuth(SHA256.Create());
+        HashPassword hash = new HashPassword(SHA256.Create());
         private readonly ProjetoContext _context;
+        private readonly ICookieService _cookieService;
 
-        public UsuarioController(ProjetoContext context)
+        public UsuarioController(
+            ProjetoContext context, 
+            ICookieService cookieService)
         {
+            _cookieService = cookieService;
             _context = context;
         }
         
-        [Route("Index")]
+        [HttpGet("Index"), AllowAnonymous]
         public IActionResult Index(bool erroLogin)
         {
-            var usuarios = _context.Usuarios.ToList();
-            if (erroLogin)
-            {
-                ViewBag.Error = "Email e/ou senha inválidos";
-            }
-            return View(usuarios);
+            if(erroLogin) ViewBag.Erro = "Login e/ou senha inválidos!";
+
+            return View();
         }
 
-        private bool ValidarUsuario(Usuario login)
-        {
-            string senhaDigitada = hash.CriptografarSenha(login.Senha.ToString());
-
-            if(_context.Usuarios.Any(x => x.Email == login.Email)
-                && _context.Usuarios.Any(x => x.Senha == senhaDigitada))
-            {
-                return true;
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Email e/ou senha inválido!");
-                return false;
-            }
-        }
-
-        [HttpPost, AllowAnonymous]
+        [HttpGet("Login"), AllowAnonymous]
         public async Task<IActionResult> Login(Usuario usuario)
         {
-            bool resultado = ValidarUsuario(usuario);
-            if (!resultado)
+            var usuarios = await _cookieService.ValidarUsuario(usuario.Email, usuario.Senha, HttpContext);
+
+            if (usuarios == null)
             {
                 return RedirectToAction("Index", new { erroLogin = true});
             }
-            await login.Login(HttpContext, usuario);
 
-            return RedirectToPage("/Views/Tarefa/Index.cshtml");
+            return RedirectToAction("Index", "Tarefa");
         }
 
-        [Authorize]
-        public async Task<IActionResult> Logoff()
+        [HttpGet("Logout"), Authorize]
+        public async Task<IActionResult> Logout()
         {
-            await login.Logoff(HttpContext);
-
+            await _cookieService.Logout(HttpContext);
             return RedirectToAction("Index");
         }
 
@@ -78,12 +64,24 @@ namespace ProjetoTarefas.Controllers
             if (ModelState.IsValid)
             {
                 string senhaSecreta = hash.CriptografarSenha(usuario.Senha.ToString());
-                usuario.Senha = senhaSecreta;
-                _context.Usuarios.Add(usuario);
+                var novoUsuario = NovoUsuario(usuario, senhaSecreta);
+                _context.Usuarios.Add(novoUsuario);
                 _context.SaveChanges();
-                return View("Index");
+                return RedirectToAction("Index");
             }
-            return View(usuario);
+            return View();
+        }
+        private Usuario NovoUsuario(Usuario usuario, string senhaSecreta)
+        {
+            var novoUsuario = new Usuario
+                {
+                    Nome = usuario.Nome,
+                    Email = usuario.Email,
+                    Senha = senhaSecreta,
+                    Nivel = usuario.Nivel,
+                    DataNascimento = usuario.DataNascimento
+                };
+            return novoUsuario;
         }
     }
 }

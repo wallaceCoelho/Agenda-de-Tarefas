@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Agenda de Tarefas";
-    var Usuario = new ProjetoTarefas.Models.Usuario();
 }
 
 <section class="vh-100">
@@ -37,7 +36,7 @@
                     <label class="form-label" for="form3Example3">Data da tarefa</label>
                 </div> 
 
-                <input asp-for="UsuarioId" value="@Usuario.UsuarioId" type="hidden" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
+                <input asp-for="UsuarioId" type="hidden" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
 
                 <div class="d-flex justify-content-between align-items-center">
                     <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Adicionar</button>

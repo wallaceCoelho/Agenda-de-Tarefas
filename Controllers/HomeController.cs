@@ -12,7 +12,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View("Views/Usuario/Index.cshtml");
+        return RedirectToAction("Index", "Usuario");
     }
 
     public IActionResult Privacy()

@@ -2,23 +2,31 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoTarefas.Data;
+using ProjetoTarefas.Interfaces;
 using ProjetoTarefas.Models;
 
 namespace ProjetoTarefas.Controllers
 {
-    [Route("[controller]"), Authorize]
+    [Route("[controller]")]
     public class TarefaController : Controller
     {
         private readonly ProjetoContext _context;
+        private readonly ICookieService _cookieService;
 
-        public TarefaController(ProjetoContext context) => _context = context;
+        public TarefaController(ProjetoContext context, ICookieService cookieService)
+        {
+            _cookieService = cookieService;
+            _context = context;
+        } 
         
-        [Route("Index")]
+        [HttpGet("Index"), AllowAnonymous]
         public IActionResult Index()
         {
-            ViewBag.UserIdentity = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier);
-            var tarefas = _context.Tarefas.ToList();
-            return View(tarefas);
+            ViewBag.Nivel = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value);
+            ViewBag.Nome = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Name).Select(x => x.Value);
+            ViewBag.UsuarioId = HttpContext.User.Claims.Where(x => x.Type == "Id").Select(x => x.Value);
+
+            return View();
         }
 
         [HttpGet("Criar")]
@@ -27,16 +35,24 @@ namespace ProjetoTarefas.Controllers
             return View();
         }
 
-        [HttpPost("CriarTarefa")]
+        [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Tarefas.Add(tarefa);
-                _context.SaveChanges();
-                return RedirectToRoute("Index", tarefa);
+            try{
+                if (ModelState.IsValid)
+                {
+                    _context.Tarefas.Add(tarefa);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
             }
-            return View();
+            catch(Exception e)
+            {
+                Console.WriteLine($"ERRO: {e}");
+            }
+            
+            return View("Criar");
         }
 
         [HttpGet("{id}")]

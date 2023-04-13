@@ -9,69 +9,69 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ProjetoTarefas
 build_property.RootNamespace = ProjetoTarefas
-build_property.ProjectDir = c:\Users\Wallace\Desktop\Projetos\Agenda-de-Tarefas\
+build_property.ProjectDir = C:\Users\Wallace\Desktop\Denovo\Agenda-de-Tarefas\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\Wallace\Desktop\Projetos\Agenda-de-Tarefas
+build_property.MSBuildProjectDirectory = C:\Users\Wallace\Desktop\Denovo\Agenda-de-Tarefas
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Home/Index.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Home/Privacy.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Shared/Error.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Tarefa/Criar.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Tarefa/Criar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWZhXENyaWFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Tarefa/Deletar.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Tarefa/Deletar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWZhXERlbGV0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Tarefa/Editar.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Tarefa/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWZhXEVkaXRhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Tarefa/Index.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Tarefa/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZWZhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Usuario/Criar.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Usuario/Criar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmlhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Usuario/Deletar.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Usuario/Deletar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZWxldGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Usuario/Editar.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Usuario/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Usuario/Index.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/_ViewImports.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/_ViewStart.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/Wallace/Desktop/Projetos/Agenda-de-Tarefas/Views/Shared/_Layout.cshtml]
+[C:/Users/Wallace/Desktop/Denovo/Agenda-de-Tarefas/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-tokgm0e79v
