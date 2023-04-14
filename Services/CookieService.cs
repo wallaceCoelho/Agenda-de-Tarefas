@@ -10,7 +10,6 @@ namespace ProjetoTarefas.Services
 {
     public class CookieService : ICookieService
     {
-
         HashPassword hash = new HashPassword(SHA256.Create());
         private readonly ProjetoContext _context;
         public CookieService(
@@ -36,10 +35,10 @@ namespace ProjetoTarefas.Services
 
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTime.Now.AddHours(8),
-                IssuedUtc = DateTime.Now
+                AllowRefresh = true,
+                IsPersistent = true
             };
-            
+
             await context.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme, 
                 claimsIdentity, 
@@ -50,17 +49,15 @@ namespace ProjetoTarefas.Services
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public async Task<Usuario> ValidarUsuario(string email, string senha, HttpContext context)
+        public Usuario ValidarUsuario(string email, string senha)
         {
             var senhaCriptografada = hash.CriptografarSenha(senha);
 
-            var user = _context.Usuarios.FirstOrDefault(
+            var usuario = _context.Usuarios.Where(
                 x => x.Email == email &&
-                x.Senha == senhaCriptografada);
-
-            await GerarClaim(context, user);
+                x.Senha == senhaCriptografada).FirstOrDefault();
             
-            return user;
+            return usuario;
         }
     }
 }

@@ -14,10 +14,8 @@ builder.Services.AddDbContext<ProjetoContext>(options => options.UseNpgsql(build
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
+        options.LoginPath = "/Usuario/Index";
         options.ExpireTimeSpan = TimeSpan.FromHours(8);
-        options.SlidingExpiration = true;
-        options.LoginPath = new PathString("/");
-        options.AccessDeniedPath = new PathString("/");
     });
 
 var app = builder.Build();

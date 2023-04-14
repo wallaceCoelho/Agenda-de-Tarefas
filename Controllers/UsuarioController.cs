@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using ProjetoTarefas.Interfaces;
 using ProjetoTarefas.Services;
 using System.Security.Cryptography;
-using System.Text.Json;
+using System.Security.Claims;
 
 namespace ProjetoTarefas.Controllers
 {
@@ -15,7 +15,6 @@ namespace ProjetoTarefas.Controllers
         HashPassword hash = new HashPassword(SHA256.Create());
         private readonly ProjetoContext _context;
         private readonly ICookieService _cookieService;
-
         public UsuarioController(
             ProjetoContext context, 
             ICookieService cookieService)
@@ -27,20 +26,30 @@ namespace ProjetoTarefas.Controllers
         [HttpGet("Index"), AllowAnonymous]
         public IActionResult Index(bool erroLogin)
         {
+            ClaimsPrincipal claims = HttpContext.User;
             if(erroLogin) ViewBag.Erro = "Login e/ou senha inválidos!";
+
+            if(claims.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Tarefa");
 
             return View();
         }
 
-        [HttpGet("Login"), AllowAnonymous]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Login(Usuario usuario)
         {
-            var usuarios = await _cookieService.ValidarUsuario(usuario.Email, usuario.Senha, HttpContext);
+            var usuarios = _cookieService.ValidarUsuario(usuario.Email, usuario.Senha);
 
             if (usuarios == null)
             {
                 return RedirectToAction("Index", new { erroLogin = true});
             }
+            TempData["UsuarioId"] = usuarios.UsuarioId.ToString();
+            TempData["Nome"] = usuarios.Nome.ToString();
+            TempData["Email"] = usuarios.Email.ToString();
+            TempData["Nivel"] = usuarios.Nivel.ToString();
+
+            await _cookieService.GerarClaim(HttpContext, usuarios);
 
             return RedirectToAction("Index", "Tarefa");
         }
@@ -55,6 +64,11 @@ namespace ProjetoTarefas.Controllers
         [HttpGet("Criar")]
         public IActionResult Criar()
         {
+            ClaimsPrincipal claims = HttpContext.User;
+
+            if(claims.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Usuario");
+
             return View();
         }
 

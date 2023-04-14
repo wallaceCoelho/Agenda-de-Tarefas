@@ -7,7 +7,7 @@ using ProjetoTarefas.Models;
 
 namespace ProjetoTarefas.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]"), Authorize]
     public class TarefaController : Controller
     {
         private readonly ProjetoContext _context;
@@ -22,10 +22,6 @@ namespace ProjetoTarefas.Controllers
         [HttpGet("Index"), AllowAnonymous]
         public IActionResult Index()
         {
-            ViewBag.Nivel = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value);
-            ViewBag.Nome = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Name).Select(x => x.Value);
-            ViewBag.UsuarioId = HttpContext.User.Claims.Where(x => x.Type == "Id").Select(x => x.Value);
-
             return View();
         }
 
@@ -38,21 +34,26 @@ namespace ProjetoTarefas.Controllers
         [HttpPost]
         public IActionResult CriarTarefa(Tarefa tarefa)
         {
-            try{
-                if (ModelState.IsValid)
-                {
-                    _context.Tarefas.Add(tarefa);
-                    _context.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-            }
-            catch(Exception e)
+            if (ModelState.IsValid)
             {
-                Console.WriteLine($"ERRO: {e}");
+                var novaTarefa = NovaTarefa(tarefa);
+                _context.Tarefas.Add(novaTarefa);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
-            
-            return View("Criar");
+            return View();
+        }
+
+        private Tarefa NovaTarefa(Tarefa tarefa)
+        {
+            var novaTarefa = new Tarefa
+            {
+                Titulo = tarefa.Titulo,
+                Descricao = tarefa.Descricao,
+                DataTarefa = tarefa.DataTarefa,
+                UsuarioId = tarefa.UsuarioId
+        };
+            return novaTarefa;
         }
 
         [HttpGet("{id}")]
