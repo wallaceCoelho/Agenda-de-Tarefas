@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjetoTarefas.Data;
 using ProjetoTarefas.Interfaces;
 using ProjetoTarefas.Models;
@@ -19,15 +20,30 @@ namespace ProjetoTarefas.Controllers
             _context = context;
         } 
         
-        [HttpGet("Index"), AllowAnonymous]
+        [AllowAnonymous]
+        public void AddSessao()
+        {
+            ViewBag.Id = User.FindFirst("Id")?.Value;
+            ViewBag.Nome = User.FindFirst(ClaimTypes.Name)?.Value;
+            ViewBag.Email = User.FindFirst(ClaimTypes.Email)?.Value;
+            ViewBag.Nivel = User.FindFirst(ClaimTypes.Role)?.Value;
+        }
+        [HttpGet("Index")]
         public IActionResult Index()
         {
-            return View();
+
+            var UsuarioId = User.FindFirst("Id")?.Value;
+            var tarefas = _context.Tarefas.Where(x => x.UsuarioId.ToString() == UsuarioId).ToList();
+
+            AddSessao();
+
+            return View(tarefas);
         }
 
         [HttpGet("Criar")]
         public IActionResult Criar()
         {
+            AddSessao();
             return View();
         }
 
@@ -52,8 +68,8 @@ namespace ProjetoTarefas.Controllers
                 Descricao = tarefa.Descricao,
                 DataTarefa = tarefa.DataTarefa,
                 UsuarioId = tarefa.UsuarioId
-        };
-            return novaTarefa;
+            };
+                return novaTarefa;
         }
 
         [HttpGet("{id}")]
@@ -75,13 +91,23 @@ namespace ProjetoTarefas.Controllers
             return Ok(tarefa);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Atualizar(int id, Tarefa tarefa)
+        [HttpGet("Editar/{id}")]
+        public IActionResult Editar(int id)
         {
-            var tarefaBanco = _context.Tarefas.Find(id);
+            var tarefaBanco = _context.Tarefas.Where(x => x.TarefaId == id).FirstOrDefault();
+            
+            if(tarefaBanco != null) return View("Criar", tarefaBanco);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPut("EditarTarefa")]
+        public IActionResult EditarTarefa(Tarefa tarefa)
+        {
+            var tarefaBanco = _context.Tarefas.Where(x => x.TarefaId == tarefa.TarefaId).FirstOrDefault();
 
             if(tarefaBanco == null)
-                return NotFound();
+                return RedirectToAction("Criar", tarefaBanco);
 
             tarefaBanco.Titulo = tarefa.Titulo;
             tarefaBanco.Descricao = tarefa.Descricao;
@@ -90,7 +116,7 @@ namespace ProjetoTarefas.Controllers
             _context.Tarefas.Update(tarefaBanco);
             _context.SaveChanges();
 
-            return Ok(tarefaBanco);
+            return RedirectToAction("Index");
         }
     }
 }

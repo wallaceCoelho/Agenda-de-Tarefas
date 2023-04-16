@@ -38,16 +38,17 @@ namespace ProjetoTarefas.Controllers
         [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Login(Usuario usuario)
         {
+            if (usuario.Email == null || usuario.Senha == null)
+            {
+                return RedirectToAction("Index", new { erroLogin = true});
+            }
+
             var usuarios = _cookieService.ValidarUsuario(usuario.Email, usuario.Senha);
 
             if (usuarios == null)
             {
                 return RedirectToAction("Index", new { erroLogin = true});
             }
-            TempData["UsuarioId"] = usuarios.UsuarioId.ToString();
-            TempData["Nome"] = usuarios.Nome.ToString();
-            TempData["Email"] = usuarios.Email.ToString();
-            TempData["Nivel"] = usuarios.Nivel.ToString();
 
             await _cookieService.GerarClaim(HttpContext, usuarios);
 

@@ -15,37 +15,67 @@
 
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <!-- FORMULÁRIO -->
-            <form asp-action="CriarTarefa" asp-controller="Tarefa">
+                @if(Model == null)
+                {
+                    <form asp-action="CriarTarefa" asp-controller="Tarefa">
+                        <div class="divider d-flex align-items-center my-4">
+                            <h2 class="text-center fw-bold mx-3 mb-0">Nova tarefa</h2>
+                        </div>
 
-                <div class="divider d-flex align-items-center my-4">
-                    <h2 class="text-center fw-bold mx-3 mb-0">Nova tarefa</h2>
-                </div>
+                    @* Título da tarefa  *@
+                    <div class="form-outline mb-4">
+                        <input asp-for="Titulo" type="text" id="form3Example1" class="form-control form-control-lg" placeholder="Título da Tarefa"/>
+                        <label class="form-label" for="form3Example3">Título da tarefa</label>
+                    </div>
+                    @* Descrição *@
+                    <div class="form-outline mb-4">
+                        <input asp-for="Descricao" type="text" id="form3Example2" class="form-control form-control-lg" placeholder="Descrição"/>
+                        <label class="form-label" for="form3Example3">Descrição</label>
+                    </div>
+                    @* Data da tarefa  *@
+                    <div class="form-outline mb-4">
+                        <input asp-for="DataTarefa" type="date" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
+                        <label class="form-label" for="form3Example3">Data da tarefa</label>
+                    </div> 
 
-                <!-- Título da tarefa -->
-                <div class="form-outline mb-4">
-                    <input asp-for="Titulo" type="text" id="form3Example1" class="form-control form-control-lg" placeholder="Título da Tarefa"/>
-                    <label class="form-label" for="form3Example3">Título da tarefa</label>
-                </div>
-                <!-- Descrição -->
-                <div class="form-outline mb-4">
-                    <input asp-for="Descricao" type="text" id="form3Example2" class="form-control form-control-lg" placeholder="Descrição"/>
-                    <label class="form-label" for="form3Example3">Descrição</label>
-                </div>
-                <!-- Data da tarefa -->
-                <div class="form-outline mb-4">
-                    <input asp-for="DataTarefa" type="date" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
-                    <label class="form-label" for="form3Example3">Data da tarefa</label>
-                </div> 
+                    <input asp-for="UsuarioId" value="@ViewBag.Id" type="hidden" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
 
-                <input asp-for="UsuarioId" value="@usuarioId" type="hidden" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Adicionar</button>
+                        <a asp-action="Index" class="text-body">Cancelar</a>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form asp-action="EditarTarefa" asp-controller="Tarefa">
+                        <div class="divider d-flex align-items-center my-4">
+                            <h2 class="text-center fw-bold mx-3 mb-0">Editar tarefa</h2>
+                        </div>
 
-                <div class="d-flex justify-content-between align-items-center">
-                    <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Adicionar</button>
-                    <a asp-action="Index" class="text-body">Cancelar</a>
-                </div>
+                    @* Título da tarefa  *@
+                    <div class="form-outline mb-4">
+                        <input asp-for="Titulo" value="@Model.Titulo" type="text" id="form3Example1" class="form-control form-control-lg" placeholder="Título da Tarefa"/>
+                        <label class="form-label" for="form3Example3">Título da tarefa</label>
+                    </div>
+                    @* Descrição *@
+                    <div class="form-outline mb-4">
+                        <input asp-for="Descricao" value="@Model.Descricao" type="text" id="form3Example2" class="form-control form-control-lg" placeholder="Descrição"/>
+                        <label class="form-label" for="form3Example3">Descrição</label>
+                    </div>
+                    @* Data da tarefa  *@
+                    <div class="form-outline mb-4">
+                        <input asp-for="DataTarefa" value="@Model.DataTarefa" type="date" id="form3Example3" class="form-control form-control-lg" placeholder="Data da Tarefa"/>
+                        <label class="form-label" for="form3Example3">Data da tarefa</label>
+                    </div> 
 
-            </form>
-            <!-- FIM FORMULÁIO -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Atualizar</button>
+                        <a asp-action="Index" class="text-body">Cancelar</a>
+                    </div>
+                </form>
+            }
+            @* FIM FORMULÁIO  *@
 
         </div>
     </div>
