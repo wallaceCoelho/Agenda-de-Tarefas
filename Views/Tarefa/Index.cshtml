@@ -1,10 +1,19 @@
 @model IEnumerable<ProjetoTarefas.Models.Tarefa>;
-
+@{
+    ViewData["Title"] = "Agenda de Tarefas";
+}
 <h2>Lista de Tarefas</h2>
 <p>
     <a class="btn btn-primary" asp-controller="Tarefa" asp-action="Criar">Nova Tarefa</a>
 </p>
-
+<br>
+<form asp-action="Index" asp-controller="Tarefa">
+    <div class="form-group d-flex">
+        <input type="text" name="input" class="form-control" value="@ViewBag.input" style="width: 50%;" placeholder="Título ou data da tarefa:">
+        <button type="submit" class="btn btn-primary ms-2">Pesquisar</button>
+    </div>
+</form>
+<br>
 <table class="table">
     <thead>
         <tr>
@@ -43,7 +52,6 @@
                 </td>
                 <td>
                     <a class="btn btn-primary" asp-action="Editar" asp-route-id="@item.TarefaId">Editar</a> 
-                    <a class="btn btn-primary" asp-action="Detalhes" asp-route-id="@item.TarefaId">Detalhes</a> 
                     <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@item.TarefaId">Deletar</a>
                 </td>
             </tr>

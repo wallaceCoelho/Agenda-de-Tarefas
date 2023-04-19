@@ -68,7 +68,7 @@ namespace ProjetoTarefas.Controllers
             ClaimsPrincipal claims = HttpContext.User;
 
             if(claims.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Usuario");
+                return RedirectToAction("Index", "Tarefa");
 
             return View();
         }

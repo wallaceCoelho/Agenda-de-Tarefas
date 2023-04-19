@@ -28,15 +28,16 @@ namespace ProjetoTarefas.Controllers
             ViewBag.Email = User.FindFirst(ClaimTypes.Email)?.Value;
             ViewBag.Nivel = User.FindFirst(ClaimTypes.Role)?.Value;
         }
+
         [HttpGet("Index")]
-        public IActionResult Index()
+        public IActionResult Index(string input)
         {
-
             var UsuarioId = User.FindFirst("Id")?.Value;
-            var tarefas = _context.Tarefas.Where(x => x.UsuarioId.ToString() == UsuarioId).ToList();
 
+            var tarefas = _context.Tarefas
+                .Where(x => x.UsuarioId.ToString() == UsuarioId).ToList();
             AddSessao();
-
+                       
             return View(tarefas);
         }
 
@@ -47,8 +48,8 @@ namespace ProjetoTarefas.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult CriarTarefa(Tarefa tarefa)
+        [HttpPost("CriarTarefa")]
+        public IActionResult Criar(Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +58,7 @@ namespace ProjetoTarefas.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return RedirectToAction(nameof(Criar));
         }
 
         private Tarefa NovaTarefa(Tarefa tarefa)
@@ -72,51 +73,61 @@ namespace ProjetoTarefas.Controllers
                 return novaTarefa;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult ObterPorId(int id)
+        [HttpGet("Editar/{id?}")]
+        public IActionResult Editar(int? id)
         {
-            var tarefa = _context.Tarefas.Find(id);
+            AddSessao();
 
-            if (tarefa == null)
-                return NotFound();
+            ViewBag.TarefaId = id;
+            var tarefaBanco = _context.Tarefas.Find(id);
+            if(tarefaBanco != null) return View(tarefaBanco);
 
-            return Ok(tarefa);
+            return View();
         }
 
-        [HttpGet("ObterPorNome")]
-        public IActionResult ObterPorTitulo(string titulo)
+        [HttpPost("EditarTarefa")]
+        public IActionResult Editar(Tarefa tarefa)
         {
-            var tarefa = _context.Tarefas.Where(x => x.Titulo.Contains(titulo));
+            var tarefaBanco = _context.Tarefas
+                .AsNoTracking()
+                .FirstOrDefault(x => x.TarefaId == tarefa.TarefaId);
 
-            return Ok(tarefa);
+            if(ModelState.IsValid && tarefaBanco != null)
+            {
+                try
+                {
+                    tarefaBanco.Titulo = tarefa.Titulo;
+                    tarefaBanco.Descricao = tarefa.Descricao;
+                    tarefaBanco.DataTarefa = tarefa.DataTarefa;
+
+                    _context.Update(tarefaBanco);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    ModelState.AddModelError("", "Erro ao salvar as asterações. " +
+                        "Tente novamente, caso persista o erro, " +
+                        "contate o administrador.");
+                }
+            }
+            return RedirectToAction(nameof(Editar));
         }
 
-        [HttpGet("Editar/{id}")]
-        public IActionResult Editar(int id)
+        [HttpGet("Deletar/{id}")]
+        public IActionResult Deletar(int id)
         {
-            var tarefaBanco = _context.Tarefas.Where(x => x.TarefaId == id).FirstOrDefault();
-            
-            if(tarefaBanco != null) return View("Criar", tarefaBanco);
+            var tarefas = _context.Tarefas
+                .AsNoTracking()
+                .FirstOrDefault(x => x.TarefaId == id);
 
-            return RedirectToAction("Index");
-        }
-
-        [HttpPut("EditarTarefa")]
-        public IActionResult EditarTarefa(Tarefa tarefa)
-        {
-            var tarefaBanco = _context.Tarefas.Where(x => x.TarefaId == tarefa.TarefaId).FirstOrDefault();
-
-            if(tarefaBanco == null)
-                return RedirectToAction("Criar", tarefaBanco);
-
-            tarefaBanco.Titulo = tarefa.Titulo;
-            tarefaBanco.Descricao = tarefa.Descricao;
-            tarefaBanco.DataTarefa = tarefa.DataTarefa;
-
-            _context.Tarefas.Update(tarefaBanco);
-            _context.SaveChanges();
-
-            return RedirectToAction("Index");
+            if(tarefas != null)
+            {
+                _context.Tarefas.Remove(tarefas);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
