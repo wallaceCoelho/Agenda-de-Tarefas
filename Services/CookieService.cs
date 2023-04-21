@@ -48,7 +48,6 @@ namespace ProjetoTarefas.Services
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
-
         public Usuario ValidarUsuario(string email, string senha)
         {
             var senhaCriptografada = hash.CriptografarSenha(senha);

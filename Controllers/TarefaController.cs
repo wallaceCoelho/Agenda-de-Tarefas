@@ -30,14 +30,21 @@ namespace ProjetoTarefas.Controllers
         }
 
         [HttpGet("Index")]
-        public IActionResult Index(string input)
+        public async Task<IActionResult> Index(string texto = "")
         {
             var UsuarioId = User.FindFirst("Id")?.Value;
 
-            var tarefas = _context.Tarefas
-                .Where(x => x.UsuarioId.ToString() == UsuarioId).ToList();
+            var tarefas = await _context.Tarefas
+                .Where(x => x.UsuarioId.ToString() == UsuarioId).ToListAsync();
+
             AddSessao();
-                       
+
+            if (!string.IsNullOrEmpty(texto))
+            {
+                tarefas = tarefas.Where(x => x.Titulo.Contains(texto)).ToList();
+                return View(tarefas);
+            }
+
             return View(tarefas);
         }
 

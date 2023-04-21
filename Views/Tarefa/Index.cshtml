@@ -4,12 +4,12 @@
 }
 <h2>Lista de Tarefas</h2>
 <p>
-    <a class="btn btn-primary" asp-controller="Tarefa" asp-action="Criar">Nova Tarefa</a>
+    <a class="btn btn-primary" asp-action="Criar">Nova Tarefa</a>
 </p>
 <br>
-<form asp-action="Index" asp-controller="Tarefa">
+<form asp-action="Index" method="get">
     <div class="form-group d-flex">
-        <input type="text" name="input" class="form-control" value="@ViewBag.input" style="width: 50%;" placeholder="Título ou data da tarefa:">
+        <input type="text" name="texto" class="form-control" value="@ViewBag.Texto" style="width: 50%;" placeholder="Título ou data da tarefa:">
         <button type="submit" class="btn btn-primary ms-2">Pesquisar</button>
     </div>
 </form>

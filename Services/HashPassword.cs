@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using ProjetoTarefas.Interfaces;
 
 namespace ProjetoTarefas.Services
 {
@@ -15,7 +10,6 @@ namespace ProjetoTarefas.Services
         {
             _algoritmo = algoritmo;
         }
-
         public string CriptografarSenha(string senha)
         {
             var valorHash = Encoding.UTF8.GetBytes(senha);

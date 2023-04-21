@@ -69,7 +69,7 @@ namespace ProjetoTarefas.Controllers
 
             if(claims.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Tarefa");
-
+                
             return View();
         }
 
