@@ -8,7 +8,7 @@ namespace ProjetoTarefas.Services
     {
         public async Task Email(string email, string body)
         {
-            var apiKey = "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";
+            var apiKey = "";
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
