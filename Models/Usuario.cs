@@ -21,7 +21,9 @@ namespace ProjetoTarefas.Models
         [MaxLength(100, ErrorMessage = "O e-mail não pode ultrapaçar 100 caracteres!")]
         [Display(Name = "E-mail válido")]
         public string Email { get; set; }
+
         public string Nivel { get; set; }
+        public string TokenEmail { get; set; }
         //
         [Required(ErrorMessage = "*Email obrigatório!")]
         [Display(Name = "E-mail válido")]

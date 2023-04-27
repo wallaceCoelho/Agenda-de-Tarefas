@@ -19,11 +19,16 @@
                 <div class="divider d-flex align-items-center my-4">
                     <h2 class="text-center fw-bold mx-3 mb-0">Criar nova conta</h2>
                 </div>
-
+                @if(!string.IsNullOrEmpty(ViewBag.Erro))
+                {
+                    <h6 style="color: red;">
+                        @ViewBag.Erro.ToString()
+                    </h6>
+                }
                 <!-- Nome Completo -->
                 <div class="form-outline mb-4">
                     <input asp-for="Nome" type="text" id="form3Example1" class="form-control form-control-lg" placeholder="Nome completo"/>
-                    <label class="form-label" for="form3Example3">Endereço de e-mail válido</label>
+                    <label class="form-label" for="form3Example3">Nome completo</label>
                 </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">

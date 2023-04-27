@@ -1,0 +1,17 @@
+@{
+    ViewData["Tilte"] = "Verificação de E-mail";
+}
+
+<form asp-action="ConfirmarEmailPost" asp-controller="Usuario">
+    <H4>Verificação de E-mail</h4>
+    @if(!string.IsNullOrEmpty(ViewBag.Erro))
+    {
+        <h6 style="color: red;">
+            @ViewBag.Erro.ToString()
+        </h6>
+    }
+    <div class="form-group d-flex">
+        <input type="text" name="cod" class="form-control" style="width: 50%;" placeholder="Código de verificação:">
+        <button type="submit" class="btn btn-primary ms-2">Confirmar</button>
+    </div>
+</form>

@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICookieService, CookieService>();
+builder.Services.AddScoped<IEnviarEmail, EnviarEmail>();
 builder.Services.AddDbContext<ProjetoContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -47,5 +48,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "Default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "ConfirmarEmail",
+    pattern: "{controller=Usuario}/{action=ConfirmarEmail}/{id?}");
+
 
 app.Run();
